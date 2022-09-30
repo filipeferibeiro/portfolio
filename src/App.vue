@@ -2,7 +2,11 @@
 	<div class="flex flex-col gap-4 h-screen">
 		<HeaderBar />
 		<main class="flex-1">
-			<router-view />
+			<router-view v-slot="{ Component }">
+				<transition name="fade" mode="out-in">
+					<component :is="Component" />
+				</transition>
+			</router-view>
 		</main>
 		<FooterBar />
 	</div>
@@ -21,4 +25,14 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity 0.3s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+	opacity: 0;
+}
+</style>

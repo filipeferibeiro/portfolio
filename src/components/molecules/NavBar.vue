@@ -89,48 +89,6 @@ export default defineComponent({
 	@apply bg-[#6462f3] hover:bg-[#6462f3] hover:border-[#7e7cf7];
 }
 
-@keyframes grow-in {
-	from {
-		opacity: 0;
-		transform: translateY(-30px);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0px);
-	}
-}
-@keyframes grow-out {
-	from {
-		opacity: 1;
-		transform: translateY(0px);
-	}
-	to {
-		opacity: 0;
-		transform: translateY(-30px);
-	}
-}
-
-@keyframes slide-in {
-	from {
-		opacity: 0;
-		transform: translateX(-100%);
-	}
-	to {
-		opacity: 1;
-		transform: translateX(0px);
-	}
-}
-@keyframes slide-out {
-	from {
-		opacity: 1;
-		transform: translateX(0px);
-	}
-	to {
-		opacity: 0;
-		transform: translateX(100%);
-	}
-}
-
 .grow-enter-active {
 	animation: grow-in 0.5s ease;
 }
@@ -139,9 +97,9 @@ export default defineComponent({
 }
 
 .slide-enter-active {
-	animation: slide-in 0.2s ease;
+	animation: slide-in 0.5s ease-in-out;
 }
 .slide-leave-active {
-	animation: slide-out 0.2s ease;
+	animation: slide-out 0.3s ease-in-out;
 }
 </style>
