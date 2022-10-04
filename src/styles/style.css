@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+	transition: background-color 0.2s linear, opacity 0.2s linear;
+}
+
+.primary-button {
+	@apply bg-portfolio-accent hover:opacity-80 border-[1px] border-white/5 self-end rounded-xl px-6 py-3 flex gap-2;
+}

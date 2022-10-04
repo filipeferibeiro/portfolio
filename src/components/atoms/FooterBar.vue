@@ -17,6 +17,6 @@ export default defineComponent({
 
 <style>
 footer {
-	@apply flex justify-center items-center py-6 text-white bg-[#4d4b51]/30 self-stretch;
+	@apply bg-portfolio-primary/30 flex justify-center items-center py-6 text-white self-stretch;
 }
 </style>

@@ -11,7 +11,10 @@ module.exports = {
 				"portfolio-gradient": "linear-gradient(to right, #243B55, #141E30)",
 			},
 			backgroundColor: {
-				"portfolio-primary": "#141E30",
+				"portfolio-primary": "#82A4CA",
+				"portfolio-accent": "#D65A31",
+				"portfolio-accent2": "#6462f3",
+				"portfolio-tertiary": "#141E30",
 			},
 			boxShadowColor: {
 				"portfolio-primary": "#2A3F65",

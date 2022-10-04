@@ -9,6 +9,7 @@
 			</ul>
 			<button
 				v-else
+				ref="toggleMenu"
 				class="h-10 w-10 flex items-center justify-center rounded-xl"
 				:class="{ 'button-hover': !mobileNav, 'button-active': mobileNav }"
 				@click="toggleMobileMenu"
@@ -18,7 +19,11 @@
 		</transition>
 
 		<transition name="grow">
-			<ul v-if="isMobile && mobileNav" class="nav-mobile">
+			<ul
+				v-show="isMobile && mobileNav"
+				class="nav-mobile"
+				v-closable="{ exclude: ['toggleMenu'], handler: closeMobileMenu }"
+			>
 				<li class="nav-item">
 					<NavItem @item-clicked="closeMobileMenu" text="Home" to="/" />
 				</li>
@@ -37,7 +42,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, DirectiveBinding } from "vue";
 import NavItem from "../atoms/NavItem.vue";
 import { Bars3Icon } from "@heroicons/vue/24/outline";
 export default defineComponent({
@@ -69,12 +74,41 @@ export default defineComponent({
 			this.mobileNav = false;
 		},
 	},
+	directives: {
+		closable: {
+			mounted(el, binding: DirectiveBinding): void {
+				const handleOutsideClick = (e: MouseEvent | TouchEvent) => {
+					e.stopPropagation();
+
+					const { handler, exclude } = binding.value;
+
+					let clickedOnExcludedEl = false;
+					exclude.forEach((refName: string) => {
+						if (!clickedOnExcludedEl) {
+							const excludedEl: any = binding.instance?.$refs[refName];
+
+							if (excludedEl) {
+								clickedOnExcludedEl = excludedEl.contains(e.target);
+							}
+						}
+					});
+
+					if (!el.contains(e.target) && !clickedOnExcludedEl) {
+						handler();
+					}
+				};
+
+				document.addEventListener("click", handleOutsideClick);
+				document.addEventListener("touchstart", handleOutsideClick);
+			},
+		},
+	},
 });
 </script>
 
 <style scoped>
 .nav-mobile {
-	@apply absolute top-16 right-0 flex gap-2 flex-col bg-[#4d4b51]/40 border-white/5 border-[1px] rounded-2xl p-2;
+	@apply absolute top-16 right-0 flex gap-2 flex-col bg-portfolio-primary/30 border-white/5 border-[1px] rounded-2xl p-2 z-10 backdrop-blur-lg;
 }
 .nav-desktop {
 	@apply flex h-full gap-2;

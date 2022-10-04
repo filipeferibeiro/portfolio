@@ -1,7 +1,7 @@
 <template>
-	<div class="flex flex-col gap-4 h-screen">
+	<div class="flex flex-col gap-4 h-screen items-center">
 		<HeaderBar />
-		<main class="flex-1">
+		<main class="flex-1 max-w-7xl w-full flex justify-center">
 			<router-view v-slot="{ Component }">
 				<transition name="fade" mode="out-in">
 					<component :is="Component" />
